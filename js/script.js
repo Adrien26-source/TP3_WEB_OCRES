@@ -1,8 +1,8 @@
 
 // Fonction appelée lors du click du bouton
-function start() {
+function start(object = "") {
   // Création de l'objet apiWeather
-  const apiWeather = new API_WEATHER();
+  const apiWeather = new API_WEATHER(object);
   // Appel de la fonction fetchTodayForecast
 
   apiWeather
@@ -16,16 +16,26 @@ function start() {
       const description = data.weather[0].description;
       const temp = data.main.temp;
       const icon = apiWeather.getHTMLElementFromIcon(data.weather[0].icon);
-
+      const city = data.name; 
       // Modifier le DOM
       document.getElementById('today-forecast-main').innerHTML = main;
       document.getElementById('today-forecast-more-info').innerHTML = description;
       document.getElementById('icon-weather-container').innerHTML = icon;
       document.getElementById('today-forecast-temp').innerHTML = `${temp}°C`;
-      
+      document.getElementById('cityDisplay').innerHTML = `Maintenant --> ${city}`;
     })
     .catch(function(error) {
       // Affiche une erreur
       console.error(error);
     });
 }
+
+function  CityChoice() {
+
+  let city = "";
+  if (document.getElementById('city-input').value !== null)
+      city = document.getElementById('city-input').value;
+
+  return start(city);
+}
+
