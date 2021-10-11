@@ -26,7 +26,19 @@ class API_WEATHER{
       crossdomain: true
     })
   }
-  // Retourne l'element HTML de l'icon symbolisant la méteo.
+  
+  getThreeDayForecast() {
+
+    console.log(JSON.stringify(`${API_URL_FORECAST}?q=${this.city}&units=metric&cnt=3&appid=${API_KEY}`));
+
+    return axios
+        .get(`${API_URL_FORECAST}?q=${this.city}&units=metric&cnt=3&appid=${API_KEY}`, {
+
+            crossdomain: true
+        });
+}
+  
+  // Retourne l'element de l'icon qui symbolise la méteo
   getHTMLElementFromIcon(icon){
     return `<img src=${API_URL_ICON}${icon}@2x.png class="weather-icon"/>`
   }
